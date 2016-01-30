@@ -14,9 +14,15 @@
   "homepage": "http://zonaextrema.com.br",
   "dependencies": {
     "elasticsearch": "^10.1.3",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.0"
   },
   "devDependencies": {
+    "babel": "^5.8.23",
+    "babelify": "^6.3.0",
+    "envify": "^3.4.0",
+    "watchify": "^3.3.1",
     "browserify": "^13.0.0",
     "domready": "^1.0.8",
     "grunt": "^0.4.5",
@@ -29,5 +35,22 @@
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs2-launcher": "^0.4.0",
     "phantomjs-prebuilt": "^2.1.3"
+  },
+  "scripts": {
+    "start": "watchify -o public/assets/js/bundle.js -v -d app/app.js",
+    "build": "browserify app/app.js -t [envify --NODE_ENV production] | uglifyjs -cm | babel --optional optimisation.react.inlineElements --optional optimisation.react.constantElements > public/assets/js/bundle.min.js"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "blacklist": [
+            "regenerator"
+          ]
+        }
+      ],
+      "envify"
+    ]
   }
 }
