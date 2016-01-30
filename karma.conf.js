@@ -2,17 +2,22 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '.',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'jasmine-ajax'],
+    frameworks: ['jasmine', 'common-require'],
 
     // list of files / patterns to load in the browser
     files: [
         'app/**/*.js',
+        'api/**/*.js',
         'spec/**/*.js'
     ],
+
+    commonRequirePreprocessor: {
+      appDir: 'api'
+    },
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor

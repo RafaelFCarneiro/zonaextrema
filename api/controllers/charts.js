@@ -7,7 +7,7 @@ module.exports = function(client, app) {
         var query = req.param("query");
 
         console.log("Query", req.params);
-    
+
         client.search({
           q: query
         }).then(function (resp) {
