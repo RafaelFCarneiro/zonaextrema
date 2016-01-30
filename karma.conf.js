@@ -6,11 +6,10 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'common-require'],
+    frameworks: ['jasmine', 'commonjs'],
 
     // list of files / patterns to load in the browser
     files: [
-        'app/**/*.js',
         'api/**/*.js',
         'spec/**/*.js'
     ],
@@ -22,7 +21,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'app/**/*.js': ['common-require']
+      'app/**/*.js': ['commonjs']
     },
 
     // test results reporter to use
@@ -34,7 +33,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['PhantomJS'],
+    browsers: ['PhantomJS2'],
     singleRun: false,
     concurrency: Infinity
   })
