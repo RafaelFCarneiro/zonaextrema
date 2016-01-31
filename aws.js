@@ -8,7 +8,8 @@ let lambda = new AWS.Lambda({
   role: 'lambda_basic_execution'
 });
 
-lambda.invoke({ FunctionName: 'ZonaExtremaFunction' }, (err, data) => {
+lambda.invoke({ FunctionName: 'createTags', Payload: JSON.stringify({"description":"#lowcarb"}) }, function(err, data) {
+
   if (err) console.log(err);
 
   console.log(data);
