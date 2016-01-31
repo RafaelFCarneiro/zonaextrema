@@ -13,6 +13,7 @@
   },
   "homepage": "http://zonaextrema.com.br",
   "dependencies": {
+    "aws-sdk": "^2.2.33",
     "babel": "^6.3.26",
     "babel-cli": "^6.4.5",
     "babel-preset-es2015": "^6.3.13",
