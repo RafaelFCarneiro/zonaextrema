@@ -1,4 +1,4 @@
-class Eat {
+export class Eat {
 
     constructor(log) {
         this.log = log;
@@ -14,7 +14,8 @@ class Eat {
 
 }
 
-class Drink {
+/*
+export class Drink {
 
     constructor(log) {
         this.log = log;
@@ -29,3 +30,4 @@ class Drink {
     }
 
 }
+*/

@@ -1,11 +1,9 @@
-//import * as Processors from "processors";
-
 class Indexer {
 
     findProcessor( log ) {
 
         this.log = log;
-        let className = this.log.kind.description;
+        var className = this.log.kind.description;
 
         return new Processors[className](log);
 
@@ -13,7 +11,7 @@ class Indexer {
 
     createTags(log) {
 
-        let processor = this.findProcessor( log );
+        var processor = this.findProcessor( log );
 
         log.description.split(" ").forEach( tag => processor.execute(tag) );
 

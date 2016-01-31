@@ -11,17 +11,27 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'api/**/*.js',
-        'spec/**/*.js'
+        'specs/**/*.js'
     ],
 
-    commonRequirePreprocessor: {
-      appDir: 'api'
+    babelPreprocessor: {
+      options: {
+        presets: ['es2015'],
+        sourceMap: 'inline'
+      },
+      filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.es5.js');
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
     },
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'api/**/*.js': ['commonjs']
+      'api/**/*.js': ['babel', 'commonjs'],
+      'specs/**/*.js': ['babel', 'commonjs']
     },
 
     // test results reporter to use
