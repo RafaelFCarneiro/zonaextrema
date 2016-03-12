@@ -1,24 +1,31 @@
-module.exports = function(client, app) {
+'use strict';
+  
+export class Charts {
+    constructor(app, models, client) {
 
-    app.get('/charts', function(req, res){
+        this.app = app;
+        this.models = models;
 
-        var logs = [];
+        app.get('/charts', function(req, res){
 
-        var query = req.param("query");
+            var logs = [];
 
-        console.log("Query", req.params);
+            var query = req.param("query");
 
-        client.search({
-          q: query
-        }).then(function (resp) {
+            console.log("Query", req.params);
 
-            logs = resp.hits.hits;
-            res.send( logs );
+            client.search({
+              q: query
+            }).then(function (resp) {
 
-        }, function (err) {
-            console.trace(err.message);
-        });
+                logs = resp.hits.hits;
+                res.send( logs );
 
-    });
+            }, function (err) {
+                console.trace(err.message);
+            });
 
-};
+        });   
+
+    }
+}

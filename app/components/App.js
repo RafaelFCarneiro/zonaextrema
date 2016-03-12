@@ -1,6 +1,16 @@
- import React from 'react';
+import React from 'react';
 
- const App = React.createClass({
+export default class App extends React.Component {
+  render() {
+    return (
+      <div className="app">
+        <h1>Biohacking</h1>
+      </div>
+    );
+  };
+};
+
+ /*const App = React.createClass({
    render() {
      return (
        <div className="app">
@@ -11,3 +21,4 @@
  });
 
  export default App;
+*/

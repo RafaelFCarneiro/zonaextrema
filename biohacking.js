@@ -1,13 +1,14 @@
-import elasticsearch from 'elasticsearch';
 import express from 'express';
-
-const client = new elasticsearch.Client({ host: 'localhost:9200',  log: 'trace' });
+import * as models from "./models";
+import { Controllers } from "./api/controllers";
 
 const app = express();
-app.use(express.static(__dirname + '/public'));
-app.set('view engine', 'jade');
 
-require('./api/controllers/index.js')(client, app);
-require('./api/controllers/charts.js')(client, app);
+require('./config/express.js')(express, app, __dirname);
+require('./config/passport.js')(express, app, __dirname, models);
+
+new Controllers(app, models);
 
 app.listen(process.env.PORT || 8080);
+
+console.log("Listen at", process.env.PORT || 8080);
