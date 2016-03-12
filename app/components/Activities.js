@@ -1,5 +1,49 @@
 import React from 'react';
 
+class TagsCard extends React.Component {
+
+    criarCard(tag) {
+        var link = <a>{tag}</a>;
+        return link;
+    }
+
+    render() {
+
+        var lista = this.props.description.split(" ").map(this.criarCard);
+
+        return (
+            <div className="tags">
+                {lista}
+            </div>
+        )
+
+    }
+
+}
+
+class KindPanelItem extends React.Component {
+
+    render() {
+        return (
+            <div className="row WEIGHT-ROW">
+
+                <div className="kind-info" data-id="{this.props.item.id}">
+                    <div className="kind">
+                        <a> WEIGHT </a>
+
+                        <a className="private"> secret </a>
+                    </div>
+                    <div className="date">{this.props.item.logged_at}</div>
+                </div>
+
+                <TagsCard description=this.props.item.description />
+
+            </div>
+        )
+    }
+
+}
+
 export default class Activities extends React.Component {
     render() {
 
@@ -286,30 +330,14 @@ export default class Activities extends React.Component {
             }
         ];
 
+        var lista = logs.map(function (item) {
+            return <KindPanelItem item=item />
+        });
+
 
         return (
             <div className="list">
-
-                <div className="row WEIGHT-ROW">
-
-                    <div className="kind-info" data-id="2">
-                        <div className="kind">
-                            <a> WEIGHT </a>
-
-                            <a className="private"> secret </a>
-                        </div>
-                        <div className="date">08/11/2015 16:21</div>
-                    </div>
-
-                    <div className="tags">
-
-                        <a>#water</a> <a>#150ml</a>
-
-                    </div>
-
-                </div>
-
-
+                {lista}
             </div>
         );
     };
