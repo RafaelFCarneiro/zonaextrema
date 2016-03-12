@@ -59,24 +59,6 @@ module.exports = function (express, app, path, models) {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.get('/login',
-        function (req, res) {
-            var messages = "";
-            var flashs = req.flash();
-            if (flashs.error) {
-                messages = flashs.error.join(" ");
-            }
-            res.render('login', {title: "Biohacking", messages: messages});
-        });
-
-    app.post('/login',
-        passport.authenticate('local', {successRedirect: '/', failureRedirect: '/login', failureFlash: true})
-    );
-
-    app.get('/logout', function (req, res) {
-        req.logout();
-        res.redirect('/');
-    });
-
+    app.set("passport", passport);
 
 };
