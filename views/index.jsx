@@ -1,24 +1,26 @@
 import React from 'react';
 import DefaultLayout from './default.jsx'
 
-class Username extends React.Component {
+class AppMain extends React.Component {
     render() {
-
-        var content;
-        var loginOrLogout;
         var user = this.props.user;
+        var login;
+        var register;
+        var bundle;
+
         if (user) {
-            content = <div>{user.username}</div>;
-            loginOrLogout = <a href="/logout">Logout</a>;
+            bundle = <script src="/assets/js/bundle.js" />
         } else {
-            loginOrLogout = <a href="/login">Login</a>
+            login = <a href="/login">Login</a>;
+            register = <a href="/register">Register</a>;
         }
 
         return (
             <div>
-                
-                {content}
-                {loginOrLogout}
+                {bundle}
+                {login}
+                <br/>
+                {register}
             </div>
         );
     }
@@ -28,7 +30,8 @@ export default class Index extends React.Component {
     render() {
         return (
             <DefaultLayout title={this.props.title}>
-                <Username user={this.props.user}/>
+                <div id="app"></div>
+                <AppMain user={this.props.user}/>
             </DefaultLayout>
         );
     };

@@ -1,24 +1,14 @@
 import React from 'react';
+import Toolbar from './Toolbar';
+import Activities from './Activities';
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <div className="app">
-        <h1>Biohacking</h1>
-      </div>
-    );
-  };
+    render() {
+        return (
+            <div>
+                <Toolbar></Toolbar>
+                <Activities></Activities>
+            </div>
+        );
+    };
 };
-
- /*const App = React.createClass({
-   render() {
-     return (
-       <div className="app">
-          <h1>Biohacking!</h1>
-       </div>
-     );
-   }
- });
-
- export default App;
-*/
