@@ -31,6 +31,7 @@ node_modules
 
 # Intellij
 .idea
+.idea/*
 
 # Optional npm cache directory
 .npm
