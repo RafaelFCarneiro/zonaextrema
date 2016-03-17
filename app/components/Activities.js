@@ -2,14 +2,14 @@ import React from 'react';
 
 class TagsCard extends React.Component {
 
-    criarCard(tag) {
-        var link = <a>{tag}</a>;
-        return link;
-    }
-
     render() {
 
-        var lista = this.props.description.split(" ").map(this.criarCard);
+        var lista = [];
+        var tags = this.props.description;
+
+        if( tags ) {
+            lista = this.props.description.split(" ").map( (tag) => <a>{tag}</a> );
+        }
 
         return (
             <div className="tags">
@@ -24,6 +24,7 @@ class TagsCard extends React.Component {
 class KindPanelItem extends React.Component {
 
     render() {
+
         return (
             <div className="row WEIGHT-ROW">
 
@@ -36,7 +37,7 @@ class KindPanelItem extends React.Component {
                     <div className="date">{this.props.item.logged_at}</div>
                 </div>
 
-                <TagsCard description=this.props.item.description />
+                <TagsCard description={this.props.item.description} />
 
             </div>
         )
@@ -45,6 +46,7 @@ class KindPanelItem extends React.Component {
 }
 
 export default class Activities extends React.Component {
+
     render() {
 
         var logs = [
@@ -330,13 +332,10 @@ export default class Activities extends React.Component {
             }
         ];
 
-        var lista = logs.map(function (item) {
-            return <KindPanelItem item=item />
-        });
-
+        var lista = logs.map( (item) => <KindPanelItem item={item} /> );
 
         return (
-            <div className="list">
+            <div className="activities">
                 {lista}
             </div>
         );
