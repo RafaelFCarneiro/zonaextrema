@@ -6,7 +6,7 @@ import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import reduxApi, {transformers} from "redux-api"
 import "isomorphic-fetch";
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 class TagsCard extends React.Component {
@@ -107,6 +107,16 @@ class ActivityAdd extends React.Component {
     }
 }
 
+class Home extends React.Component {
+
+    render() {
+        return (
+            <div style={{ marginTop: '1.5em' }}>{this.props.children}</div>
+        )
+
+    }
+}
+
 export default class Activities extends React.Component {
 
     render() {
@@ -136,8 +146,10 @@ export default class Activities extends React.Component {
             <Provider store={store}>
 
                 <Router history={history}>
-                    <Route path="/" component={SmartActivitiesList}>
+                    <Route path="/" component={Home}>
+                        <IndexRoute component={ActivityAdd}/>
                         <Route path="add" component={ActivityAdd}/>
+                        <Route path="today" component={SmartActivitiesList}/>
                     </Route>
                 </Router>
 

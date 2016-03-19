@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import { Link, browserHistory } from 'react-router'
 
 export default class Menu extends Component {
     render() {
         return (
             <div className="toolbar-menu">
 
-                <a className="fa fa-search" href="/filter">Filter</a>
-
-                <a className="actived fa fa-calendar-check-o" href="/">Today</a>
-
-                <a className="fa fa-bar-chart" href="/charts">Charts</a>
+                <Link className="fa fa-search" to="/add">Filter</Link>
+                <Link className="actived fa fa-calendar-check-o" to="/">Today</Link>
+                <Link className="fa fa-bar-chart" to="/charts">Charts</Link>
 
             </div>
         );
