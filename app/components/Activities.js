@@ -6,6 +6,8 @@ import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import reduxApi, {transformers} from "redux-api"
 import "isomorphic-fetch";
+import { Router, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 class TagsCard extends React.Component {
 
@@ -15,7 +17,7 @@ class TagsCard extends React.Component {
         var tags = this.props.description;
 
         if (tags) {
-            lista = this.props.description.split(" ").map(function(tag, index) {
+            lista = this.props.description.split(" ").map(function (tag, index) {
                 var tagId = "tag" + index;
                 return <a key={tagId}>{tag}</a>
             })
@@ -66,7 +68,7 @@ const rest = reduxApi({
         , crud: true
         , transformer: transformers.array
     }
-}).use("fetch", (url, options) => fetch(url, options).then((resp)=> resp.json()) );
+}).use("fetch", (url, options) => fetch(url, options).then((resp)=> resp.json()));
 
 
 class ActivitiesList extends React.Component {
@@ -93,14 +95,30 @@ class ActivitiesList extends React.Component {
 }
 
 
-export default class Activities extends React.Component {
+class ActivityAdd extends React.Component {
+    render() {
 
+        return (
+            <div>
+                Cadastrar
+            </div>
+        )
+
+    }
+}
+
+export default class Activities extends React.Component {
 
     render() {
 
         const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, createLogger())(createStore);
-        const reducer = combineReducers(rest.reducers);
+        const reducer = combineReducers({
+            ...rest.reducers,
+            routing: routerReducer
+        });
         const store = createStoreWithMiddleware(reducer);
+
+        const history = syncHistoryWithStore(browserHistory, store)
 
         store.subscribe(()=> {
             console.log("ESTADO no LOGGER", store.getState())
@@ -116,7 +134,13 @@ export default class Activities extends React.Component {
 
         return (
             <Provider store={store}>
-                <SmartActivitiesList />
+
+                <Router history={history}>
+                    <Route path="/" component={SmartActivitiesList}>
+                        <Route path="add" component={ActivityAdd}/>
+                    </Route>
+                </Router>
+
             </Provider>
         )
 
