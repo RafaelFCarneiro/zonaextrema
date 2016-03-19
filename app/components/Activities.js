@@ -8,6 +8,7 @@ import reduxApi, {transformers} from "redux-api"
 import "isomorphic-fetch";
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import Menu from './toolbar/Menu'
 
 class TagsCard extends React.Component {
 
@@ -107,11 +108,15 @@ class ActivityAdd extends React.Component {
     }
 }
 
+
 class Home extends React.Component {
 
     render() {
         return (
-            <div style={{ marginTop: '1.5em' }}>{this.props.children}</div>
+            <div style={{ marginTop: '1.5em' }}>
+                <Menu />
+                {this.props.children}
+            </div>
         )
 
     }
@@ -147,7 +152,7 @@ export default class Activities extends React.Component {
 
                 <Router history={history}>
                     <Route path="/" component={Home}>
-                        <IndexRoute component={ActivityAdd}/>
+                        <IndexRoute component={SmartActivitiesList}/>
                         <Route path="add" component={ActivityAdd}/>
                         <Route path="today" component={SmartActivitiesList}/>
                     </Route>

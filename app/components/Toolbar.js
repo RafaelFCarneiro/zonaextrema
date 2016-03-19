@@ -9,7 +9,7 @@ export default class Toolbar extends React.Component {
             <div className="toolbar">
                 <Title />
                 <AddButton />
-                <Menu />
+
             </div>
         );
     };
