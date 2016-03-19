@@ -29,6 +29,8 @@
     "express": "^4.13.4",
     "express-react-views": "^0.10.0",
     "express-session": "^1.13.0",
+    "fetch": "^1.0.1",
+    "isomorphic-fetch": "^2.2.1",
     "jade": "^1.11.0",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
@@ -37,6 +39,11 @@
     "pg-hstore": "^2.3.2",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-redux": "^4.4.1",
+    "redux": "^3.3.1",
+    "redux-api": "^0.9.0",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.0.1",
     "sequelize": "^3.19.3"
   },
   "devDependencies": {

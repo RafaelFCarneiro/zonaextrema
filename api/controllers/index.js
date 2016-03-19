@@ -2,6 +2,7 @@
 
 import { Kinds } from "./kinds.js";
 import { Users } from "./users.js";
+import { Activities } from "./activities.js";
 
 export class Controllers {
   
@@ -13,6 +14,7 @@ export class Controllers {
       
       new Kinds(app, models);
       new Users(app, models);
+      new Activities(app, models);
       
   }
   
