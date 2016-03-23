@@ -1,30 +1,30 @@
 import React from 'react';
 import DefaultLayout from './default.jsx'
 
+class Unlogged extends React.Component {
+    render() {
+        return (
+            <div className="mdl-card mdl-shadow--2dp">
+                <div className="mdl-card__supporting-text">
+                    <h4>Login</h4>
+                    <a href="/login">Login</a>
+                    <h4>Register</h4>
+                    <a href="/register">Register</a>
+                </div>
+            </div>
+        )
+    }
+}
+
 class AppMain extends React.Component {
     render() {
-        var user = this.props.user;
-        var login;
-        var register;
-        var bundle;
-
-        if (user) {
-            bundle = <script src="/assets/js/bundle.js" />
-        } else {
-            login = <a href="/login">Login</a>;
-            register = <a href="/register">Register</a>;
-        }
-
         return (
-            <div>
-                {bundle}
-                {login}
-                <br/>
-                {register}
+            <div className="unlogged-card">
+                { !this.props.user ? <Unlogged /> : <script src="/assets/js/bundle.js"/> }
             </div>
-        );
+        )
     }
-};
+}
 
 export default class Index extends React.Component {
     render() {
@@ -33,6 +33,6 @@ export default class Index extends React.Component {
                 <div id="app"></div>
                 <AppMain user={this.props.user}/>
             </DefaultLayout>
-        );
-    };
-};
+        )
+    }
+}

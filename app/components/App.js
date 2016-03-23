@@ -11,7 +11,7 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div style={{ marginTop: '1.5em' }}>
+            <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                 <Toolbar ></Toolbar>
                 {this.props.children}
             </div>
@@ -30,7 +30,7 @@ export default class App extends React.Component {
             <div>
                 <Router history={history}>
                     <Route path="/" component={Home}>
-                        <IndexRoute component={Activities}/>
+                        <IndexRoute path="/today" component={Activities}/>
                         <Route path="add" component={ActivityAdd}/>
                         <Route path="today" component={Activities}/>
                     </Route>

@@ -17,7 +17,7 @@ export default class List extends React.Component {
         );
 
         return (
-            <div className="activities">
+            <div className="mdl-layout__content zx-activities">
                 { Items }
             </div>
         )
