@@ -1,25 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { connect } from 'react-redux'
+import Grid from './Grid'
 
-export default class Add extends React.Component {
-
-    componentDidMount() {
-        const {dispatch, rest} = this.props;
-        dispatch(rest.actions.kinds.sync());
-    }
+export default class Add extends Component {
 
     render() {
 
-        const Items = this.props.kinds.data.map(
-            function (item) {
-                return <KindPanelItem key={item.id} activity={item}/>
+        function mapProps(state) {
+            return {
+                kinds: state.kinds
             }
-        );
+        }
+
+        const SmartGrid = connect(mapProps)(Grid);
 
         return (
-            <div className="mdl-layout__content zx-activities">
-                { Items }
-            </div>
+            <SmartGrid rest={this.props.rest}/>
         )
 
     }
+
 }

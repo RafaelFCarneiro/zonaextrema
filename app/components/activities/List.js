@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import KindPanelItem from './KindPanelItem'
 
-export default class List extends React.Component {
+export default class List extends Component {
 
     componentDidMount() {
         const {dispatch, rest} = this.props;
