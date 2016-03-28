@@ -7,6 +7,7 @@ export default class Activities extends React.Component {
     render() {
 
         function mapProps(state) {
+
             return {
                 activities: state.activities
             }
