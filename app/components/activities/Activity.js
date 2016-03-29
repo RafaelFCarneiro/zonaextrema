@@ -1,7 +1,7 @@
 import React from 'react'
 import TagsCard from './TagsCard'
 
-export default class KindPanelItem extends React.Component {
+export default class Activity extends React.Component {
 
     render() {
 

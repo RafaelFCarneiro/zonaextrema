@@ -1,23 +1,20 @@
+import ReactDOM from 'react-dom';
+import React, { Component, PropTypes } from 'react';
+
 import reduxApi, {transformers} from "redux-api"
 import "isomorphic-fetch";
 
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-import ActivityAdd from './components/activities/Add'
-import Toolbar from './components/Toolbar'
-import Activities from './components/Activities'
-
-
-import ReactDOM from 'react-dom';
-import React, { Component, PropTypes } from 'react';
-
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
-import { ReduxRouter, routerStateReducer, reduxReactRouter, pushState } from 'redux-router';
-import { Route, Link } from 'react-router';
 import { Provider, connect } from 'react-redux';
-import { createHistory } from 'history';
+import { Router, Route, IndexRoute, IndexRedirect, Link, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
+import Toolbar from './components/Toolbar'
+import Activities from './components/activities/List'
+import AddActivity from './components/activities/Grid'
 
 const rest = reduxApi({
     activities: {
@@ -32,17 +29,6 @@ const rest = reduxApi({
     }
 }).use("fetch", (url, options) => fetch(url, options).then((resp)=> resp.json()));
 
-const reducer = combineReducers({
-    router: routerStateReducer,
-    ...rest.reducers
-});
-
-const store = compose(
-    reduxReactRouter({ createHistory }),
-    applyMiddleware(thunkMiddleware)
-)(createStore)(reducer);
-
-@connect((state) => ({}))
 class Home extends Component {
     render() {
 
@@ -60,26 +46,31 @@ class Home extends Component {
 class Root extends Component {
     render() {
 
-        function mapToProps() {
-            return { rest: rest }
-        }
+        const reducer = combineReducers({
+            routing: routerReducer,
+            rest: function () {
+                return rest
+            },
+            ...rest.reducers
+        });
 
-        const SmartActivities = connect(mapToProps)(Activities)
-        const SmartActivityAdd = connect(mapToProps)(ActivityAdd)
+        const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer);
+        const history = syncHistoryWithStore(browserHistory, store)
 
         return (
             <div>
                 <Provider store={store}>
-                    <ReduxRouter>
+                    <Router history={history}>
                         <Route path="/" component={Home}>
-                            <Route path="add" component={SmartActivityAdd}/>
-                            <Route path="today" component={SmartActivities}/>
+                            <IndexRedirect to="/today"/>
+                            <Route path="add" component={AddActivity}/>
+                            <Route path="today" component={Activities}/>
                         </Route>
-                    </ReduxRouter>
+                    </Router>
                 </Provider>
             </div>
         );
     }
 }
 
-ReactDOM.render(<Root />, document.getElementById('app'))
+ReactDOM.render(<Root  />, document.getElementById('app'))

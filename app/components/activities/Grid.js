@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
 
+@connect((state) => ({ rest: state.rest, kinds: state.kinds }))
 export default class Grid extends Component {
 
     componentDidMount() {
@@ -11,13 +13,12 @@ export default class Grid extends Component {
 
         const Items = this.props.kinds.data.map(
             function (item) {
-                //return <KindPanelItem key={item.id} activity={item}/>
-                return <p>{item.description}</p>
+                return <div className="zx-kind" style={{backgroundColor: item.color}} key={item.id}>{item.description}</div>
             }
         );
 
         return (
-            <div className="mdl-layout__content zx-kinds">
+            <div className="mdl-layout__content zx-grid">
                 { Items }
             </div>
         )

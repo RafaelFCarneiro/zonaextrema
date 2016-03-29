@@ -1,6 +1,11 @@
 import React, {Component} from 'react'
-import KindPanelItem from './KindPanelItem'
+import { connect } from 'react-redux';
+import Activity from './Activity'
 
+@connect((state) => ({
+    rest: state.rest,
+    activities: state.activities
+}))
 export default class List extends Component {
 
     componentDidMount() {
@@ -12,7 +17,7 @@ export default class List extends Component {
 
         const Items = this.props.activities.data.map(
             function (item) {
-                return <KindPanelItem key={item.id} activity={item}/>
+                return <Activity key={item.id} activity={item}/>
             }
         );
 

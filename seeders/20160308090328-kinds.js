@@ -90,7 +90,7 @@ module.exports = {
             },
             {
                 id: '13',
-                color: '#54B7B7',
+                color: '#876A9D',
                 description: 'PRAY',
                 createdAt: new Date,
                 updatedAt: new Date
