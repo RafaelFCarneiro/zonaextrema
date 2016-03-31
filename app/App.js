@@ -12,9 +12,12 @@ import { Provider, connect } from 'react-redux';
 import { Router, Route, IndexRoute, IndexRedirect, Link, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-import Toolbar from './components/Toolbar'
+import Home from './Home'
+
 import Activities from './components/activities/List'
 import AddActivity from './components/activities/Grid'
+
+import ActivitiesReducers from "./reducers/Activities"
 
 const rest = reduxApi({
     activities: {
@@ -29,19 +32,6 @@ const rest = reduxApi({
     }
 }).use("fetch", (url, options) => fetch(url, options).then((resp)=> resp.json()));
 
-class Home extends Component {
-    render() {
-
-        return (
-            <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                <Toolbar />
-                <div className="content">
-                    {this.props.children}
-                </div>
-            </div>
-        )
-    }
-}
 
 class Root extends Component {
     render() {
@@ -51,6 +41,7 @@ class Root extends Component {
             rest: function () {
                 return rest
             },
+            addActivity: ActivitiesReducers,
             ...rest.reducers
         });
 

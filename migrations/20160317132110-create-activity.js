@@ -14,11 +14,27 @@ module.exports = {
             description: {
                 type: Sequelize.TEXT
             },
-            user_id: {
-                type: Sequelize.INTEGER
+            UserId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: "Users",
+                    key: 'id',
+                    // This declares when to check the foreign key constraint. PostgreSQL only.
+                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+                }
             },
-            kind_id: {
-                type: Sequelize.INTEGER
+            KindId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: "Kinds",
+                    key: 'id',
+                    // This declares when to check the foreign key constraint. PostgreSQL only.
+                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+                }
+            },
+            loggedAt: {
+                allowNull: false,
+                type: Sequelize.DATE
             },
             createdAt: {
                 allowNull: false,

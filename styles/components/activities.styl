@@ -1,7 +1,6 @@
 .zx-activities
   display flex
   flex-direction column
-  margin-top 5px
 
   .row
     flex 1 100%
@@ -11,8 +10,19 @@
     border-bottom 1px solid #ddd
     padding 20px
     font-size 1.5em
-    margin 5px
     background-color #fff
+
+    .tags
+      flex 1 70%
+
+      a
+        color: #757575;
+        font-size: 0.8em;
+        cursor: pointer;
+        font-family: 'PT Sans', sans-serif;
+        background-color: #f1f1f1;
+        padding: 2px;
+        margin: 2px;
 
     .kind-info
       flex 1 30%
@@ -22,9 +32,11 @@
       .kind
 
         a
-          cursor pointer
-          font-family Roboto
-          font-weight bolder
+          color: #0F4C59;
+          cursor: pointer;
+          font-size: 1em;
+          font-family: Roboto;
+          font-weight: bolder;
 
         .private
           color: #a1882b!important;
@@ -34,4 +46,30 @@
           vertical-align: middle;
           font-size: 0.5em!important;
           display: inline-block;
-          padding: 4px 5px 3px;
+          padding: 1px 3px 1px 3px;
+
+
+      .date
+        font-size: 1.1em;
+        font-family: Roboto;
+        display: inline-block;
+        padding: 5px;
+        font-weight: normal;
+        color: #666;
+        margin-top: 20px;
+        width 100%
+
+        span
+          text-align: center;
+          width: 100%;
+          display: inline-block;
+          font-size: 1em;
+          margin-top: 10px;
+
+
+        .day-month, .day
+          font-size: 0.5em;
+          font-weight: lighter;
+          display: inline-block;
+          width: 100%;
+          text-align: center;

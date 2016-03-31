@@ -1,13 +1,20 @@
-.toolbar-menu
+.zx-toolbar-menu
 
-  a.actived
-    border-bottom: 1px solid #6D8888;
-    height: 30px!important;
-    padding: 0;
-    font-size: larger;
-
-  a
+  .mdl-navigation__link
+    line-height inherit
     color: #6D8888;
     text-decoration: none;
     text-align: center;
     margin 1em
+
+  .mdl-navigation__link.actived
+    border-bottom: 1px solid #6D8888;
+    padding: 0 0 15px 0;
+    font-size: x-large;
+
+.mdl-layout__drawer
+  .zx-toolbar-menu
+    .mdl-navigation__link.actived
+      border-bottom 0
+      font-size: x-large;
+      padding: 16px;

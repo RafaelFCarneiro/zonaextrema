@@ -15,7 +15,7 @@ export default class TagsCard extends React.Component {
         }
 
         return (
-            <div className="tags">
+            <div className="mdl-cell--hide-phone tags">
                 {lista}
             </div>
         )
