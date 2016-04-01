@@ -38,6 +38,11 @@ export default class Home extends Component {
                 <div className="content">
                     {this.props.children}
                 </div>
+
+                <div className="mdl-js-snackbar mdl-snackbar zx-snackbar">
+                  <div className="mdl-snackbar__text"></div>
+                  <button className="mdl-snackbar__action" type="button"></button>
+                </div>
             </div>
         )
     }

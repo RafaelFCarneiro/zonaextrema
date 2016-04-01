@@ -1,6 +1,7 @@
 import React from 'react'
-import TagsCard from './TagsCard'
 import moment from 'moment'
+import Hammer from 'react-hammerjs'
+import TagsCard from './TagsCard'
 
 export default class Activity extends React.Component {
 
@@ -13,33 +14,35 @@ export default class Activity extends React.Component {
 
         return (
 
-            <div className="mdl-shadow--2dp row WEIGHT-ROW" style={{
-                borderLeftColor: this.props.activity.Kind.color,
-                borderLeftStyle: 'solid',
-                borderLeftWidth: '15px',
-            }}>
+            <Hammer onPress={this.props.remove}>
 
-                <div className="kind-info" data-id="{this.props.item.id}">
-                    <div className="kind">
-                        <a> WEIGHT </a>
+                <div className="mdl-shadow--2dp row WEIGHT-ROW" style={{
+                    borderLeftColor: this.props.activity.Kind.color,
+                    borderLeftStyle: 'solid',
+                    borderLeftWidth: '15px'
+                }}>
 
-                        <a className="private"> secret </a>
-                    </div>
-                    <div className="date">
-                        { date }
-                        <div className="mdl-cell--hide-phone day">
-                            { day }
+                    <div className="kind-info" data-id="{this.props.item.id}">
+                        <div className="kind">
+                            <a> {this.props.activity.Kind.description } </a>
+                            <a className="private"> secret </a>
                         </div>
-                        <div className="day-month">
-                            { dayMonth }
+                        <div className="date">
+                            { date }
+                            <div className="mdl-cell--hide-phone day">
+                                { day }
+                            </div>
+                            <div className="day-month">
+                                { dayMonth }
+                            </div>
                         </div>
                     </div>
+
+                    <TagsCard key={tagCardsId} description={this.props.activity.description}/>
+
+
                 </div>
-
-                <TagsCard key={tagCardsId} description={this.props.activity.description}/>
-
-
-            </div>
+            </Hammer>
         )
     }
 
