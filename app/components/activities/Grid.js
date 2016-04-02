@@ -16,9 +16,7 @@ export default class Grid extends Component {
         const {dispatch, rest} = this.props;
         dispatch(function(next, getState){
 
-            //let activity = {"UserId": 1, "KindId": kind.id, "secret": true }
-            //let state = getState();
-            //next( state.rest.actions.activities.post(activity) )
+
 
             browserHistory.replace("/today")
         }.bind(this));

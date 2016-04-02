@@ -21,7 +21,7 @@ import ActivitiesReducers from "./reducers/Activities"
 
 const rest = reduxApi({
     activities: {
-        url: `/activities`
+        url: `/activities/:id`
         , crud: true
         , transformer: transformers.array
     },

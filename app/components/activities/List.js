@@ -22,15 +22,15 @@ export default class List extends Component {
 
     remove(activity) {
 
-        this.props.activities.data.forEach((item, index, array) => {
-            if (item.id === activity.id) array.splice(index, 1)
-        })
-
-        this.forceUpdate();
+        //this.props.activities.data.forEach((item, index, array) => {
+        //    if (item.id === activity.id) array.splice(index, 1)
+        //})
+        //
+        //this.forceUpdate();
 
         //debugger;
-        //const {dispatch, rest} = this.props;
-        //dispatch(rest.actions.activities.delete(activity))
+        const {dispatch, rest} = this.props;
+        dispatch(rest.actions.activities.delete(activity))
 
 
         //dispatch(function(next, getState){
