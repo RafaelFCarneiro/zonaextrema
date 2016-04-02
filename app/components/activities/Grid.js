@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'
 import Kind from "./Kind"
+import reduxApi, { async } from "redux-api";
 
 @connect((state) => ({rest: state.rest, kinds: state.kinds}))
 export default class Grid extends Component {
@@ -24,25 +25,20 @@ export default class Grid extends Component {
             "loggedAt": now
         }
 
-        dispatch(rest.actions.activities.post({}, {
-            body: JSON.stringify(activity),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }))
-
-
-        //dispatch(function(next, getState){
-        //
-        //    const {rest} = getState()
-        //
-        //    next(rest.actions.activities.post({}))
-        //
-        //
-        //    browserHistory.replace("/today")
-        //}.bind(this));
-
+        async(dispatch,
+            (cb)=> rest.actions.activities.post(
+                {},
+                {
+                    body: JSON.stringify(activity),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                },
+                cb
+            ),
+            rest.actions.activities.get
+        ).then(()=> browserHistory.replace("/today"));
 
     }
 
