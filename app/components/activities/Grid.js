@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'
 import Kind from "./Kind"
 
-@connect((state) => ({ rest: state.rest, kinds: state.kinds }))
+@connect((state) => ({rest: state.rest, kinds: state.kinds}))
 export default class Grid extends Component {
 
     componentDidMount() {
@@ -17,16 +17,20 @@ export default class Grid extends Component {
 
         let now = new Date
         let activity = {
-                        "UserId": 1,
-                        "KindId": kind.id,
-                        "description": "",
-                        "secret": true,
-                        "createdAt": now,
-                        "updatedAt": now,
-                        "loggedAt": now
-                    }
+            "UserId": 1,
+            "KindId": kind.id,
+            "description": "",
+            "secret": true,
+            "loggedAt": now
+        }
 
-        dispatch( rest.actions.activities.post(activity) )
+        dispatch(rest.actions.activities.post({}, {
+            body: JSON.stringify(activity),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }))
 
 
         //dispatch(function(next, getState){
@@ -45,7 +49,7 @@ export default class Grid extends Component {
     render() {
 
         const Items = this.props.kinds.data.map(
-            (kind) => <Kind kind={kind} key={kind.id} handler={this.add.bind(this, kind)} />, this
+            (kind) => <Kind kind={kind} key={kind.id} handler={this.add.bind(this, kind)}/>, this
         );
 
         return (

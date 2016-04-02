@@ -23,7 +23,11 @@ const rest = reduxApi({
     activities: {
         url: `/activities/:id`
         , crud: true
-        , transformer: transformers.array
+        , transformer: transformers.array,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
     },
     kinds: {
         url: `/kinds`

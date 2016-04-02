@@ -1,6 +1,7 @@
 'use strict';
 var passport = require('passport'),
     crypto = require('crypto'),
+    bodyParser = require('body-parser'),
     Strategy = require('passport-local').Strategy;
 
 module.exports = function (express, app, path, models) {
@@ -53,7 +54,8 @@ module.exports = function (express, app, path, models) {
 
     app.use(require('morgan')('combined'));
     app.use(require('cookie-parser')());
-    app.use(require('body-parser').urlencoded({extended: true}));
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
     app.use(require('express-session')({secret: 'keyboard cat', resave: false, saveUninitialized: false}));
     app.use(require('connect-flash')());
     app.use(passport.initialize());

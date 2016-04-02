@@ -27,5 +27,20 @@ export class Activities {
 
         });
 
+
+        app.post('/activities', function (req, res) {
+
+            let model = req.body;
+
+            models.Activity.create(model).then(function (activity) {
+
+                res.send(activity);
+
+            }).catch(function(err){
+                res.send(err);
+            });
+
+        });
+
     }
 }
