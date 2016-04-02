@@ -14,12 +14,30 @@ export default class Grid extends Component {
     add(kind) {
 
         const {dispatch, rest} = this.props;
-        dispatch(function(next, getState){
+
+        let now = new Date
+        let activity = {
+                        "UserId": 1,
+                        "KindId": kind.id,
+                        "description": "",
+                        "secret": true,
+                        "createdAt": now,
+                        "updatedAt": now,
+                        "loggedAt": now
+                    }
+
+        dispatch( rest.actions.activities.post(activity) )
 
 
-
-            browserHistory.replace("/today")
-        }.bind(this));
+        //dispatch(function(next, getState){
+        //
+        //    const {rest} = getState()
+        //
+        //    next(rest.actions.activities.post({}))
+        //
+        //
+        //    browserHistory.replace("/today")
+        //}.bind(this));
 
 
     }
