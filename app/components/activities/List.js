@@ -1,6 +1,8 @@
 import ReactDOM from 'react-dom';
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router'
+import reduxApi, { async } from "redux-api";
 import Hammer from 'react-hammerjs'
 import Activity from './Activity'
 
@@ -11,8 +13,9 @@ import Activity from './Activity'
 export default class List extends Component {
 
     redo(activity) {
-        this.props.activities.data.push(activity)
-        this.forceUpdate()
+        /*
+
+        */
     }
 
     swipeToRefresh() {
@@ -22,25 +25,11 @@ export default class List extends Component {
 
     remove(activity) {
 
-        //this.props.activities.data.forEach((item, index, array) => {
-        //    if (item.id === activity.id) array.splice(index, 1)
-        //})
-        //
-        //this.forceUpdate();
-
-        //debugger;
         const {dispatch, rest} = this.props;
-        dispatch(rest.actions.activities.delete(activity))
 
+        let action = (cb)=> rest.actions.activities.delete({id:activity.id}, cb)
 
-        //dispatch(function(next, getState){
-        //
-        //    debugger;
-        //    //let activity = {"UserId": 1, "KindId": kind.id, "secret": true }
-        //    //let state = getState();
-        //    //next( state.rest.actions.activities.post(activity) )
-        //
-        //}.bind(this));
+        async(dispatch, action, rest.actions.activities.get)
 
         var snackbarContainer = document.querySelector('.zx-snackbar');
         var data = {

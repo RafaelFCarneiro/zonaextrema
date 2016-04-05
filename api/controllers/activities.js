@@ -4,6 +4,24 @@ export class Activities {
     constructor(app, models) {
         this.app = app;
 
+
+        app.get('/activities/:id', function (req, res) {
+
+            models.Activity.findById(req.params.id, {
+                include: [
+                    {
+                        model: models.Kind
+                    }
+                ]
+            }).then(function (activity) {
+
+                res.send(activity);
+
+            });
+
+        });
+
+
         app.get('/activities', function (req, res) {
 
             models.Activity.findAll({
@@ -33,10 +51,20 @@ export class Activities {
             let model = req.body;
 
             models.Activity.create(model).then(function (activity) {
-
                 res.send(activity);
+            }).catch(function (err) {
+                res.send(err);
+            });
 
-            }).catch(function(err){
+        });
+
+
+        app.delete('/activities/:id', function (req, res) {
+
+            let id = req.params.id;
+            models.Activity.destroy({where: {id: id}}).then(function (activity) {
+                res.send([]);
+            }).catch(function (err) {
                 res.send(err);
             });
 

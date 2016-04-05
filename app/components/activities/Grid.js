@@ -26,17 +26,7 @@ export default class Grid extends Component {
         }
 
         async(dispatch,
-            (cb)=> rest.actions.activities.post(
-                {},
-                {
-                    body: JSON.stringify(activity),
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                },
-                cb
-            ),
+            (cb)=> rest.actions.activities.post( {}, { body: JSON.stringify(activity) }, cb ),
             rest.actions.activities.get
         ).then(()=> browserHistory.replace("/today"));
 
