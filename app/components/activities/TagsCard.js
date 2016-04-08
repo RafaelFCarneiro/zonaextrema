@@ -1,25 +1,14 @@
 import React from 'react'
 
-export default class TagsCard extends React.Component {
+export default function TagsCard({ description }) {
 
-    render() {
+  const list = description.split(" ")
+                          .map( (tag, index) => 
+                                  tag.length? <a key={ `tag${index}` }>{tag.trim()}</a> : "" )
 
-        var lista = [];
-        var tags = this.props.description;
-
-        if (tags) {
-            lista = this.props.description.split(" ").map(function (tag, index) {
-                var tagId = "tag" + index;
-                return <a key={tagId}>{tag}</a>
-            })
-        }
-
-        return (
-            <div className="mdl-cell--hide-phone tags">
-                {lista}
-            </div>
-        )
-
-    }
-
+  return (
+      <div className="mdl-cell--hide-phone tags">
+          {list}
+      </div>
+  )
 }

@@ -16,8 +16,8 @@ export default class Grid extends Component {
 
         const {dispatch, rest} = this.props;
 
-        let now = new Date
-        let activity = {
+        const now = new Date
+        const activity = {
             "UserId": 1,
             "KindId": kind.id,
             "description": "",
@@ -34,13 +34,13 @@ export default class Grid extends Component {
 
     render() {
 
-        const Items = this.props.kinds.data.map(
+        const kinds = this.props.kinds.data.map(
             (kind) => <Kind kind={kind} key={kind.id} handler={this.add.bind(this, kind)}/>, this
         );
 
         return (
             <div className="mdl-layout__content zx-grid">
-                { Items }
+                { kinds }
             </div>
         )
 

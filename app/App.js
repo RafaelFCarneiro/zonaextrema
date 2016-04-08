@@ -7,7 +7,6 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-/* API para conexão rest ao servidor usando redux-api */
 import rest from './restful'
 
 import Home from './Home'
@@ -23,9 +22,7 @@ class Root extends Component {
 
         const reducer = combineReducers({
             routing: routerReducer,
-            rest: function () {
-                return rest
-            },
+            rest: () => rest,
             addActivity: ActivitiesReducers,
             ...rest.reducers
         });
