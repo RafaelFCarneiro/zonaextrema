@@ -1,3 +1,5 @@
+import reduxApi, {transformers} from "redux-api"
+
 const activitiesMapping = {
     activities: {
         url: `/activities/:id`
