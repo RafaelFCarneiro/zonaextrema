@@ -1,8 +1,8 @@
-import reduxApi, {transformers} from "redux-api"
+import {transformers} from 'redux-api';
 
 const activitiesMapping = {
     activities: {
-        url: `/activities/:id`
+        url: '/activities/:id'
         , crud: true
         , transformer: transformers.array,
         options: {
@@ -12,6 +12,6 @@ const activitiesMapping = {
             }
         }
     }
-}
+};
 
-export default activitiesMapping
+export default activitiesMapping;

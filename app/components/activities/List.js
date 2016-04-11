@@ -1,10 +1,8 @@
-import ReactDOM from 'react-dom';
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router'
-import reduxApi, { async } from "redux-api";
-import Hammer from 'react-hammerjs'
-import Activity from './Activity'
+import { async } from 'redux-api';
+import Hammer from 'react-hammerjs';
+import Activity from './Activity';
 
 @connect((state) => ({
     rest: state.rest,
@@ -12,10 +10,9 @@ import Activity from './Activity'
 }))
 export default class List extends Component {
 
-    redo(activity) {
-        /*
-
-        */
+    componentDidMount() {
+        const {dispatch, rest} = this.props;
+        dispatch(rest.actions.activities.sync());
     }
 
     swipeToRefresh() {
@@ -27,9 +24,9 @@ export default class List extends Component {
 
         const {dispatch, rest} = this.props;
 
-        let action = (cb)=> rest.actions.activities.delete({id:activity.id}, cb)
+        let action = (cb)=> rest.actions.activities.delete({id:activity.id}, cb);
 
-        async(dispatch, action, rest.actions.activities.get)
+        async(dispatch, action, rest.actions.activities.get);
 
         var snackbarContainer = document.querySelector('.zx-snackbar');
         var data = {
@@ -41,23 +38,23 @@ export default class List extends Component {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
     }
 
-    componentDidMount() {
-        const {dispatch, rest} = this.props;
-        dispatch(rest.actions.activities.sync());
-    }
-
     render() {
 
+        const removeHandler = (item) => this.remove.bind(this, item);
+        const swipeHandler = this.swipeToRefresh.bind(this);
+
         const Items = this.props.activities.data.map(
-            (item) => <Activity key={item.id} activity={item} remove={this.remove.bind(this, item)}/>, this
-        )
+            (item) => <Activity key={item.id} activity={item} remove={removeHandler(item)} />, this
+        );
 
         return (
-            <Hammer vertical={true} onSwipe={this.swipeToRefresh.bind(this)}>
+            <Hammer vertical onSwipe={swipeHandler}>
                 <div className="mdl-layout__content zx-activities">
                     { Items }
                 </div>
             </Hammer>
-        )
+        );
+
     }
+
 }

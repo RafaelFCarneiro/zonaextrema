@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import Title from './components/toolbar/Title'
-import Menu from './components/toolbar/Menu'
-import AddButton from './components/toolbar/AddButton'
+import Title from './components/toolbar/Title';
+import Menu from './components/toolbar/Menu';
+import AddButton from './components/toolbar/AddButton';
 
 export default class Home extends Component {
     render() {
 
-        const menu = <Menu />
+        const menu = <Menu />;
 
         return (
             <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -44,6 +44,6 @@ export default class Home extends Component {
                   <button className="mdl-snackbar__action" type="button"></button>
                 </div>
             </div>
-        )
+        );
     }
 }

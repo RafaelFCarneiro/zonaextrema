@@ -1,52 +1,58 @@
 import ReactDOM from 'react-dom';
-import React from 'react'
-import moment from 'moment'
-import Hammer from 'react-hammerjs'
-import TagsCard from './TagsCard'
+import React from 'react';
+import moment from 'moment';
+import Hammer from 'react-hammerjs';
+import TagsCard from './TagsCard';
 
 export default class Activity extends React.Component {
 
-    toggle(event) {
-        const el = ReactDOM.findDOMNode(this).querySelector(".zx-activity--actions");
-        el.style.display = (el.style.display === "" || el.style.display === "none") ? "flex" : "none"
+    toggle() {
+        const el = ReactDOM.findDOMNode(this).querySelector('.zx-activity--actions');
+        el.style.display = (el.style.display === '' || el.style.display === 'none') ? 'flex' : 'none';
     }
 
     render() {
 
-        const { activity } = this.props
-        const loggedAt = moment(activity.loggedAt)
+        const { activity } = this.props;
+        const loggedAt = moment(activity.loggedAt);
 
-        const tagCardsId = `TagId&${activity.id}`
-        const date = loggedAt.format('HH:mm')
-        const day = loggedAt.format('dddd')
-        const dayMonth = loggedAt.format('MMMM Do YYYY')
+        const tagCardsId = `TagId&${activity.id}`;
+        const date = loggedAt.format('HH:mm');
+        const day = loggedAt.format('dddd');
+        const dayMonth = loggedAt.format('MMMM Do YYYY');
+
+        const backgroundConf = {
+            backgroundColor: activity.Kind.color
+        };
+        const styleConfig = {
+            borderLeftColor: activity.Kind.color,
+            borderLeftStyle: 'solid',
+            borderLeftWidth: '15px'
+        };
+
+        const toggleHandler = this.toggle.bind(this);
+        const removeHandler = this.props.remove;
 
         return (
 
-            <Hammer onPress={this.props.remove}>
+            <Hammer onPress={removeHandler}>
 
-                <div className="mdl-shadow--2dp row WEIGHT-ROW" style={{
-                    borderLeftColor: activity.Kind.color,
-                    borderLeftStyle: 'solid',
-                    borderLeftWidth: '15px'
-                }}>
+                <div className="mdl-shadow--2dp row WEIGHT-ROW" style={styleConfig}>
 
-                    <div className="zx-activity--actions" style={{
-                                        backgroundColor: activity.Kind.color
-                                    }}>
+                    <div className="zx-activity--actions" style={backgroundConf}>
 
                         <button className="mdl-button mdl-js-button mdl-button--raised">
-                          Edit
+                            Edit
                         </button>
 
                         <button className="mdl-button mdl-js-button mdl-button--raised">
-                          Delete
+                            Delete
                         </button>
 
 
                     </div>
 
-                    <div onClick={this.toggle.bind(this)} className="kind-info" data-id="{this.props.item.id}">
+                    <div onClick={toggleHandler} className="kind-info">
                         <div className="kind">
                             <a> {activity.Kind.description } </a>
                             <a className="private"> secret </a>
@@ -62,12 +68,12 @@ export default class Activity extends React.Component {
                         </div>
                     </div>
 
-                    <TagsCard key={tagCardsId} description={activity.description || ""}/>
+                    <TagsCard key={tagCardsId} description={activity.description || ''} />
 
 
                 </div>
             </Hammer>
-        )
+        );
     }
 
 }

@@ -1,21 +1,19 @@
 import ReactDOM from 'react-dom';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
-import { Provider, connect } from 'react-redux';
-import { Router, Route, IndexRoute, IndexRedirect, Link, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRedirect, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 
-import rest from './restful'
+import rest from './restful';
 
-import Home from './Home'
-import Activities from './components/activities/List'
-import AddActivity from './components/activities/Grid'
-import Filter from './components/Filter'
-import Charts from './components/Charts'
-
-import ActivitiesReducers from "./reducers/Activities"
+import Home from './Home';
+import Activities from './components/activities/List';
+import AddActivity from './components/activities/Grid';
+import Filter from './components/Filter';
+import Charts from './components/Charts';
 
 class Root extends Component {
     render() {
@@ -23,23 +21,22 @@ class Root extends Component {
         const reducer = combineReducers({
             routing: routerReducer,
             rest: () => rest,
-            addActivity: ActivitiesReducers,
             ...rest.reducers
         });
 
-        const store = compose(applyMiddleware(thunkMiddleware))(createStore)(reducer);
-        const history = syncHistoryWithStore(browserHistory, store)
+        const store = compose(applyMiddleware(thunkMiddleware, createLogger()))(createStore)(reducer);
+        const history = syncHistoryWithStore(browserHistory, store);
 
         return (
             <div>
                 <Provider store={store}>
                     <Router history={history}>
                         <Route path="/" component={Home}>
-                            <IndexRedirect to="/today"/>
-                            <Route path="add" component={AddActivity}/>
-                            <Route path="today" component={Activities}/>
-                            <Route path="filter" component={Filter}/>
-                            <Route path="charts" component={Charts}/>
+                            <IndexRedirect to="/today" />
+                            <Route path="add" component={AddActivity} />
+                            <Route path="today" component={Activities} />
+                            <Route path="filter" component={Filter} />
+                            <Route path="charts" component={Charts} />
                         </Route>
                     </Router>
                 </Provider>
@@ -48,4 +45,4 @@ class Root extends Component {
     }
 }
 
-ReactDOM.render(<Root  />, document.getElementById('app'))
+ReactDOM.render(<Root  />, document.getElementById('app'));

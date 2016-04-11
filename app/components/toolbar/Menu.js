@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 
-export default class Menu extends Component {
+export default class Menu extends React.Component {
     render() {
         return (
             <nav className="mdl-navigation zx-toolbar-menu">
@@ -10,5 +10,5 @@ export default class Menu extends Component {
                 <Link activeClassName="actived" className="mdl-navigation__link fa fa-bar-chart" to="/charts">Charts</Link>
             </nav>
         );
-    };
-};
+    }
+}

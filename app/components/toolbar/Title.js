@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 
-export default class Title extends Component {
+export default class Title extends React.Component {
     render() {
         return (
             <div className="zx-toolbar-title">
 
                 <Link className="zx-toolbar-logo" to="/">
-                    <img src="/assets/images/biologo.png" alt="Biohacking"/>
+                    <img src="/assets/images/biologo.png" alt="Biohacking" />
                 </Link>
 
 
@@ -20,5 +20,5 @@ export default class Title extends Component {
 
             </div>
         );
-    };
-};
+    }
+}

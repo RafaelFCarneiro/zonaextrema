@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 
-export default class AddButton extends Component {
+export default class AddButton extends React.Component {
     render() {
         return (
             <div>
@@ -12,5 +12,5 @@ export default class AddButton extends Component {
 
             </div>
         );
-    };
-};
+    }
+}

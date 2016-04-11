@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React from 'react';
 
-export default class Kind extends Component {
+export default class Kind extends React.Component {
 
     render() {
 
@@ -8,7 +8,7 @@ export default class Kind extends Component {
             <div onClick={this.props.handler} className="zx-kind" style={{backgroundColor: this.props.kind.color}}>
                 {this.props.kind.description}
             </div>
-        )
+        );
 
     }
 
