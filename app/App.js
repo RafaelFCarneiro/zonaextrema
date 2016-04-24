@@ -15,13 +15,28 @@ import AddActivity from './components/activities/Grid';
 import Filter from './components/Filter';
 import Charts from './components/Charts';
 
+function logState(state, action) {
+
+  console.log("BIOHACKING", state, action);
+
+  if (typeof state === 'undefined') {
+    return {};
+  }
+
+  // For now, don’t handle any actions
+  // and just return the state given to us.
+  return state;
+}
+
 class Root extends Component {
+
     render() {
 
         const reducer = combineReducers({
             routing: routerReducer,
             rest: () => rest,
-            ...rest.reducers
+            ...rest.reducers,
+            logState: logState
         });
 
         const store = compose(applyMiddleware(thunkMiddleware, createLogger()))(createStore)(reducer);

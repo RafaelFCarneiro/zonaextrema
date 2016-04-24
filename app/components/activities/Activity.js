@@ -14,6 +14,7 @@ export default class Activity extends React.Component {
     render() {
 
         const { activity } = this.props;
+        const { description } = activity;
         const loggedAt = moment(activity.loggedAt);
 
         const tagCardsId = `TagId&${activity.id}`;
@@ -37,7 +38,7 @@ export default class Activity extends React.Component {
 
             <Hammer onPress={removeHandler}>
 
-                <div className="mdl-shadow--2dp row WEIGHT-ROW" style={styleConfig}>
+                <div onClick={toggleHandler} className="mdl-shadow--2dp row WEIGHT-ROW" style={styleConfig}>
 
                     <div className="zx-activity--actions" style={backgroundConf}>
 
@@ -45,14 +46,13 @@ export default class Activity extends React.Component {
                             Edit
                         </button>
 
-                        <button className="mdl-button mdl-js-button mdl-button--raised">
+                        <button className="mdl-button mdl-js-button zx-activity--actions--delete">
                             Delete
                         </button>
 
-
                     </div>
 
-                    <div onClick={toggleHandler} className="kind-info">
+                    <div className="kind-info">
                         <div className="kind">
                             <a> {activity.Kind.description } </a>
                             <a className="private"> secret </a>
@@ -68,8 +68,7 @@ export default class Activity extends React.Component {
                         </div>
                     </div>
 
-                    <TagsCard key={tagCardsId} description={activity.description || ''} />
-
+                    <TagsCard key={tagCardsId} description={description || ''} />
 
                 </div>
             </Hammer>

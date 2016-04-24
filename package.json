@@ -84,6 +84,7 @@
     "webpack": "^1.12.14"
   },
   "scripts": {
+    "verify:js": "eslint ./app/",
     "watch:css": "stylus -w -c styles/main.styl -o public/assets/css/main.css",
     "watch:js": "watchify -o public/assets/js/bundle.js -v -d app/App.js",
     "build:js": "browserify app/app.js -o public/assets/js/bundle.min.js -t babelify -t [uglifyify --no-sourcemap --no-bundle-external]",

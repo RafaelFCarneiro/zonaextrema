@@ -20,6 +20,15 @@ export default class List extends Component {
         dispatch(rest.actions.activities.get());
     }
 
+    redo(activity) {
+      const {dispatch, rest} = this.props;
+
+      let action = (cb)=> rest.actions.activities.post({}, { body: JSON.stringify(activity) }, cb);
+
+      async(dispatch, action, rest.actions.activities.get);
+
+    }
+
     remove(activity) {
 
         const {dispatch, rest} = this.props;

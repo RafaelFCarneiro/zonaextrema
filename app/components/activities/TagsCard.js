@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function TagsCard({ description }) {
+export default function TagsCard( {description=''} ) {
 
+  const createTag = (tag, index) => tag.length? <a key={ `tag${index}` }>{tag.trim()}</a> : '';
   const list = description.split(' ')
-                          .map( (tag, index) => 
-                                  tag.length? <a key={ `tag${index}` }>{tag.trim()}</a> : '' );
+                          .map( createTag );
 
   return (
       <div className="mdl-cell--hide-phone tags">
@@ -14,4 +14,4 @@ export default function TagsCard({ description }) {
 
 }
 
-//TagsCard.propTypes = { description: React.PropTypes.string };
+TagsCard.propTypes = { description: React.PropTypes.string };
