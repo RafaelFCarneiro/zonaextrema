@@ -33,6 +33,10 @@ export default class Activity extends React.Component {
 
         const toggleHandler = this.toggle.bind(this);
         const removeHandler = this.props.remove;
+        const secretHandler = this.props.secret;
+
+        const secret = (activity.secret)?
+        <a className="private" onClick={secretHandler}> secret </a> : '';
 
         return (
 
@@ -55,7 +59,7 @@ export default class Activity extends React.Component {
                     <div className="kind-info">
                         <div className="kind">
                             <a> {activity.Kind.description } </a>
-                            <a className="private"> secret </a>
+                            {secret}
                         </div>
                         <div className="date">
                             { date }

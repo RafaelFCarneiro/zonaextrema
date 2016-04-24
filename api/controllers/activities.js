@@ -46,6 +46,27 @@ export class Activities {
         });
 
 
+        app.put('/activities/:id', function (req, res) {
+
+          models.Activity.findById(req.params.id, {
+              include: [
+                  {
+                      model: models.Kind
+                  }
+              ]
+          }).then(function (activity) {
+
+              activity.update({
+                secret: false
+              }).then(function() {
+                res.send(activity);
+              });
+
+          });
+
+
+        });
+
         app.post('/activities', function (req, res) {
 
             let model = req.body;

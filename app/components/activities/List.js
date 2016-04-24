@@ -47,13 +47,24 @@ export default class List extends Component {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
     }
 
+    secret(activity) {
+      const {dispatch, rest} = this.props;
+
+      let action = (cb)=> rest.actions.activities.put({ id: activity.id, secret: false }, cb);
+
+      async(dispatch, action, rest.actions.activities.get);
+
+    }
+
     render() {
 
         const removeHandler = (item) => this.remove.bind(this, item);
+        const secretHandler = (item) => this.secret.bind(this, item);
+
         const swipeHandler = this.swipeToRefresh.bind(this);
 
         const Items = this.props.activities.data.map(
-            (item) => <Activity key={item.id} activity={item} remove={removeHandler(item)} />, this
+            (item) => <Activity key={item.id} activity={item} secret={secretHandler(item)} remove={removeHandler(item)} />, this
         );
 
         return (
