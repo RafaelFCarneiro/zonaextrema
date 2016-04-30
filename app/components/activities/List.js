@@ -14,22 +14,21 @@ export default class List extends Component {
     componentDidMount() {
         const {dispatch, offline, rest} = this.props;
 
-        const callback = () => {
+        const sync = () => {
+          dispatch( offline.action('activities/sync', {
+            component: this
+          }) );
+        };
 
+        const merge = () => {
 
           async(dispatch, rest.actions.activitiesOnline.get ).then(() => {
-            dispatch( offline.action('activities/merge', {}) );
+            dispatch( offline.action('activities/merge', {}, sync) );
           });
 
         };
 
-        // dispatch( offline.action('activities/sync', {
-        //   component: this
-        // }) );
-
-
-
-        dispatch( offline.action('activities/list', {}, callback) );
+        dispatch( offline.action('activities/list', {}, merge) );
 
     }
 

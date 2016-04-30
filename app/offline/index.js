@@ -2,14 +2,15 @@ function action(action, payload, callback) {
 
   return function(dispatch, getState) {
 
-    const {database, rest} = getState();
+    const {database, rest, activitiesOnline} = getState();
 
     dispatch({
       type: action,
       database: database,
       rest: rest,
+      activitiesOnline: activitiesOnline,
       payload: payload
-    })
+    });
 
     if(callback) {
       callback();
@@ -29,7 +30,7 @@ function reducer(state, action) {
     };
   }
 
-  if(action.type === "activities/merge") {
+  if(action.type === 'activities/merge') {
     debugger;
   }
 
