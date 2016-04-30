@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultLayout from './default.jsx'
+import DefaultLayout from './default.jsx';
 
 class Unlogged extends React.Component {
     render() {
@@ -12,7 +12,7 @@ class Unlogged extends React.Component {
                     <a href="/register">Register</a>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -20,9 +20,10 @@ class AppMain extends React.Component {
     render() {
         return (
             <div className="unlogged-card">
-                { !this.props.user ? <Unlogged /> : <script src="/assets/js/bundle.js"/> }
+                <script src="/assets/js/localstoragedb.min.js" />
+                { !this.props.user ? <Unlogged /> : <script src="/assets/js/bundle.js" /> }
             </div>
-        )
+        );
     }
 }
 
@@ -31,8 +32,8 @@ export default class Index extends React.Component {
         return (
             <DefaultLayout title={this.props.title}>
                 <div id="app"></div>
-                <AppMain user={this.props.user}/>
+                <AppMain user={this.props.user} />
             </DefaultLayout>
-        )
+        );
     }
 }

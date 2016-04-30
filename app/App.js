@@ -15,6 +15,9 @@ import AddActivity from './components/activities/Grid';
 import Filter from './components/Filter';
 import Charts from './components/Charts';
 
+import offline from './offline';
+import database from './database';
+
 class Root extends Component {
 
     render() {
@@ -22,6 +25,9 @@ class Root extends Component {
         const reducer = combineReducers({
             routing: routerReducer,
             rest: () => rest,
+            database: () => database,
+            offline: () => offline,
+            activities: offline.activities,
             ...rest.reducers
         });
 

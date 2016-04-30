@@ -4,7 +4,12 @@ import { browserHistory } from 'react-router';
 import Kind from './Kind';
 import { async } from 'redux-api';
 
-@connect((state) => ({rest: state.rest, kinds: state.kinds}))
+@connect((state) => ({
+  rest: state.rest,
+  kinds: state.kinds,
+  offline: state.offline,
+  activities: state.activities
+}))
 export default class Grid extends React.Component {
 
     componentDidMount() {
@@ -14,21 +19,20 @@ export default class Grid extends React.Component {
 
     add(kind) {
 
-        const {dispatch, rest} = this.props;
-
+        const {dispatch, offline} = this.props;
         const now = new Date;
         const activity = {
             'UserId': 1,
             'KindId': kind.id,
             'description': '',
             'secret': true,
-            'loggedAt': now
+            'loggedAt': now,
+            'Kind': kind
         };
 
-        async(dispatch,
-            (cb)=> rest.actions.activities.post( {}, { body: JSON.stringify(activity) }, cb ),
-            rest.actions.activities.get
-        ).then(()=> browserHistory.replace('/today'));
+        const callback = () => browserHistory.replace('/today');
+
+        dispatch( offline.action('activities/add', activity, callback) );
 
     }
 

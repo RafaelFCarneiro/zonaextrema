@@ -6,13 +6,19 @@ import Activity from './Activity';
 
 @connect((state) => ({
     rest: state.rest,
-    activities: state.activities
+    activities: state.activities,
+    offline: state.offline
 }))
 export default class List extends Component {
 
     componentDidMount() {
-        const {dispatch, rest} = this.props;
-        dispatch(rest.actions.activities.sync());
+        const {dispatch, offline} = this.props;
+
+        const callback = () => dispatch( offline.action('activities/sync', {
+          component: this
+        }) );
+        dispatch( offline.action('activities/list', {}, callback) );
+
     }
 
     swipeToRefresh() {
@@ -64,7 +70,7 @@ export default class List extends Component {
         const swipeHandler = this.swipeToRefresh.bind(this);
 
         const Items = this.props.activities.data.map(
-            (item) => <Activity key={item.id} activity={item} secret={secretHandler(item)} remove={removeHandler(item)} />, this
+            (item) => <Activity key={item.ID} activity={item} secret={secretHandler(item)} remove={removeHandler(item)} />, this
         );
 
         return (
