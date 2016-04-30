@@ -1,7 +1,7 @@
 import {transformers} from 'redux-api';
 
 const activitiesMapping = {
-    activities: {
+    activitiesOnline: {
         url: '/activities/:id'
         , crud: true
         , transformer: transformers.array,

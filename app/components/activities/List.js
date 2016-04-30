@@ -12,11 +12,23 @@ import Activity from './Activity';
 export default class List extends Component {
 
     componentDidMount() {
-        const {dispatch, offline} = this.props;
+        const {dispatch, offline, rest} = this.props;
 
-        const callback = () => dispatch( offline.action('activities/sync', {
-          component: this
-        }) );
+        const callback = () => {
+
+
+          async(dispatch, rest.actions.activitiesOnline.get ).then(() => {
+            dispatch( offline.action('activities/merge', {}) );
+          });
+
+        };
+
+        // dispatch( offline.action('activities/sync', {
+        //   component: this
+        // }) );
+
+
+
         dispatch( offline.action('activities/list', {}, callback) );
 
     }

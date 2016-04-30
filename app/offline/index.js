@@ -2,11 +2,12 @@ function action(action, payload, callback) {
 
   return function(dispatch, getState) {
 
-    const { database } = getState();
+    const {database, rest} = getState();
 
     dispatch({
       type: action,
       database: database,
+      rest: rest,
       payload: payload
     })
 
@@ -23,17 +24,22 @@ function reducer(state, action) {
   if (typeof state === 'undefined') {
     state = {
       data: [],
-      sync: false
+      async: false,
+      merged: false
     };
   }
 
+  if(action.type === "activities/merge") {
+    debugger;
+  }
+
   if(action.type === 'activities/sync') {
-    state.sync = true;
     action.payload.component.forceUpdate();
   }
 
   if(action.type === 'activities/list') {
     state.data = action.database.queryAll('activities');
+    state.async = true;
   }
 
   if(action.type === 'activities/add') {
