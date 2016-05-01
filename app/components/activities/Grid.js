@@ -19,7 +19,7 @@ export default class Grid extends React.Component {
 
     add(kind) {
 
-        const {dispatch, offline} = this.props;
+        const {dispatch, rest} = this.props;
         const now = new Date;
         const activity = {
             'UserId': 1,
@@ -31,7 +31,6 @@ export default class Grid extends React.Component {
         };
 
         const callback = () => browserHistory.replace('/today');
-
         dispatch( offline.action('activities/add', activity, callback) );
 
     }

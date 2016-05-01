@@ -26,12 +26,22 @@ function reducer(state, action) {
     state = {
       data: [],
       async: false,
-      merged: false
+      merged: false,
+      dirty: {
+        add: []
+      }
     };
   }
 
   if(action.type === 'activities/merge') {
-    debugger;
+    state.data.reduce( function(dirty, activity, index, collection) {
+      let founded = action.activitiesOnline.data.filter( function(act){ return act.token === activity.token } ).length;
+      //lembrar de verificar se ele já não está no add
+      if(activity.token && !founded ) {
+        dirty.add.push(activity);
+      }
+      return dirty;
+    }, state.dirty);
   }
 
   if(action.type === 'activities/sync') {
@@ -44,6 +54,11 @@ function reducer(state, action) {
   }
 
   if(action.type === 'activities/add') {
+    action.payload.token = 'activities-' +
+                            action.payload.UserId +
+                            '-' +
+                            action.payload.KindId +
+                            (new Date).getTime();
     action.database.insert('activities', action.payload);
     action.database.commit();
   }

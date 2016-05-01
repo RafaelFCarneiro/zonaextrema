@@ -8,7 +8,8 @@ if( database.isNew() ) {
       'description',
       'secret',
       'loggedAt',
-      'Kind'
+      'Kind',
+      'token'
     ]);
 
     database.commit();

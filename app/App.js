@@ -17,6 +17,7 @@ import Charts from './components/Charts';
 
 import offline from './offline';
 import database from './database';
+import MiddlewareMerge from './offline/MiddlewareMerge';
 
 class Root extends Component {
 
@@ -31,7 +32,9 @@ class Root extends Component {
             ...rest.reducers
         });
 
-        const store = compose(applyMiddleware(thunkMiddleware, createLogger()))(createStore)(reducer);
+        const store = compose(
+          applyMiddleware(thunkMiddleware, createLogger(), MiddlewareMerge)
+        )(createStore)(reducer);
         const history = syncHistoryWithStore(browserHistory, store);
 
         return (

@@ -23,7 +23,9 @@ export default class List extends Component {
         const merge = () => {
 
           async(dispatch, rest.actions.activitiesOnline.get ).then(() => {
-            dispatch( offline.action('activities/merge', {}, sync) );
+            dispatch( offline.action('activities/merge', {
+              component: this
+            }, sync) );
           });
 
         };
