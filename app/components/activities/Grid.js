@@ -19,7 +19,7 @@ export default class Grid extends React.Component {
 
     add(kind) {
 
-        const {dispatch, rest} = this.props;
+        const {dispatch, offline} = this.props;
         const now = new Date;
         const activity = {
             'UserId': 1,
