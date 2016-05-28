@@ -1,5 +1,3 @@
-'use strict';
-
 export class Activities {
     constructor(app, models) {
         this.app = app;
@@ -25,6 +23,9 @@ export class Activities {
         app.get('/activities', function (req, res) {
 
             models.Activity.findAll({
+                order: [
+                  ['loggedAt', 'ASC']
+                ],
                 include: [
                     {
                         model: models.Kind

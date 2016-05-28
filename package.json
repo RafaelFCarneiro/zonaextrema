@@ -60,7 +60,7 @@
     "eslint-plugin-react": "^4.3.0",
     "parallelshell": "^2.0.0",
     "sequelize-cli": "^2.3.1",
-    "stylus": "^0.54.2",
+    "stylus": "0.54.2",
     "uglifyify": "^3.0.1",
     "uglifyjs": "^2.4.10",
     "watchify": "^3.3.1"
@@ -68,7 +68,7 @@
   "scripts": {
     "verify:js": "eslint ./app/",
     "watch:css": "stylus -w -c styles/main.styl -o public/assets/css/main.css",
-    "watch:js": "watchify -o public/assets/js/bundle.js -v -d app/App.js",
+    "watch:js": "watchify -o public/assets/js/bundle.js -v -d api/app/app.js",
     "build:js": "browserify app/app.js -o public/assets/js/bundle.min.js -t babelify -t [uglifyify --no-sourcemap --no-bundle-external]",
     "watch:all": "parallelshell 'npm run watch:js' 'npm run watch:css'",
     "start": "node -r babel-register biohacking.js"
